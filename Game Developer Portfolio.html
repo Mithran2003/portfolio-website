@@ -1,0 +1,3106 @@
+<!DOCTYPE html>
+<!-- saved from url=(0036)file:///D:/Opera_Download/Index.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Developer Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+    <link href="file:///D:/Opera_Download/Game%20Developer%20Portfolio_files/css2" rel="stylesheet">
+
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      :root {
+        --bg: #05060f;
+        --bg-2: #080a16;
+        --bg-3: #0c0e1e;
+        --accent: #ffb800;
+        --accent-2: #ff3370;
+        --accent-3: #7affad;
+        --white: #e8f0ff;
+        --muted: #5a6080;
+        --border: rgba(255, 184, 0, 0.1);
+        --border-w: rgba(255, 255, 255, 0.06);
+        --font-head: "Rajdhani", sans-serif;
+        --font-body: "Exo 2", sans-serif;
+        --font-mono: "IBM Plex Mono", monospace;
+        --nav-h: 70px;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        background: var(--bg);
+        color: var(--white);
+        font-family: var(--font-body);
+        font-size: 16px;
+        line-height: 1.6;
+        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      /* ─── Scanlines overlay ─── */
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background: repeating-linear-gradient(
+          0deg,
+          transparent,
+          transparent 2px,
+          rgba(0, 0, 0, 0.06) 2px,
+          rgba(0, 0, 0, 0.06) 4px
+        );
+        pointer-events: none;
+        z-index: 9998;
+      }
+
+      /* ─── Corner bracket utility ─── */
+      .bracket {
+        position: relative;
+      }
+      .bracket::before,
+      .bracket::after {
+        content: "";
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        border-color: var(--accent);
+        border-style: solid;
+        opacity: 0.5;
+      }
+      .bracket::before {
+        top: 0;
+        left: 0;
+        border-width: 1px 0 0 1px;
+      }
+      .bracket::after {
+        bottom: 0;
+        right: 0;
+        border-width: 0 1px 1px 0;
+      }
+
+      /* ═══════════════════════════════
+       NAVBAR
+    ═══════════════════════════════ */
+      .navbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: var(--nav-h);
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 clamp(1.25rem, 5vw, 4rem);
+        transition:
+          background 0.4s,
+          border-color 0.4s;
+        border-bottom: 1px solid transparent;
+      }
+
+      .navbar.scrolled {
+        background: rgba(5, 6, 15, 0.88);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border-color: var(--border);
+      }
+
+      /* ── Logo ── */
+      .nav-logo {
+        font-family: var(--font-head);
+        font-size: 1.5rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        text-decoration: none;
+        color: var(--white);
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .logo-icon {
+        width: 32px;
+        height: 32px;
+        position: relative;
+        flex-shrink: 0;
+      }
+      .logo-icon svg {
+        width: 100%;
+        height: 100%;
+      }
+
+      .nav-logo .accent-text {
+        color: var(--accent);
+        text-shadow: 0 0 18px rgba(255, 184, 0, 0.5);
+      }
+
+      /* ── Links ── */
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+        list-style: none;
+      }
+      .nav-links a {
+        font-family: var(--font-mono);
+        font-size: 0.78rem;
+        font-weight: 400;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        text-decoration: none;
+        color: var(--muted);
+        display: flex;
+        align-items: center;
+        gap: 0.3rem;
+        transition: color 0.25s;
+      }
+      .nav-links a .num {
+        color: var(--accent);
+        opacity: 0.7;
+        font-size: 0.68rem;
+      }
+      .nav-links a:hover {
+        color: var(--white);
+      }
+      .nav-links a:hover .num {
+        opacity: 1;
+      }
+
+      /* ── CTA ── */
+      .nav-cta {
+        font-family: var(--font-mono);
+        font-size: 0.78rem;
+        font-weight: 500;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        text-decoration: none;
+        color: var(--accent);
+        padding: 0.5rem 1.3rem;
+        border: 1px solid var(--accent);
+        background: rgba(255, 184, 0, 0.06);
+        clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+        transition:
+          background 0.25s,
+          box-shadow 0.25s,
+          transform 0.2s;
+      }
+      .nav-cta:hover {
+        background: rgba(255, 184, 0, 0.15);
+        box-shadow:
+          0 0 20px rgba(255, 184, 0, 0.25),
+          inset 0 0 20px rgba(255, 184, 0, 0.05);
+        transform: translateY(-1px);
+      }
+
+      /* ── Hamburger ── */
+      .hamburger {
+        display: none;
+        flex-direction: column;
+        justify-content: center;
+        gap: 5px;
+        cursor: pointer;
+        padding: 0.5rem;
+        background: none;
+        border: none;
+      }
+      .hamburger span {
+        display: block;
+        height: 1.5px;
+        background: var(--white);
+        border-radius: 0;
+        transition:
+          transform 0.3s,
+          opacity 0.3s,
+          width 0.3s;
+        transform-origin: center;
+      }
+      .hamburger span:nth-child(1) {
+        width: 22px;
+      }
+      .hamburger span:nth-child(2) {
+        width: 15px;
+      }
+      .hamburger span:nth-child(3) {
+        width: 22px;
+      }
+      .hamburger.open span:nth-child(1) {
+        transform: translateY(6.5px) rotate(45deg);
+        width: 22px;
+      }
+      .hamburger.open span:nth-child(2) {
+        opacity: 0;
+      }
+      .hamburger.open span:nth-child(3) {
+        transform: translateY(-6.5px) rotate(-45deg);
+      }
+
+      /* ── Mobile menu ── */
+      .mobile-menu {
+        display: none;
+        position: fixed;
+        inset: var(--nav-h) 0 0 0;
+        background: rgba(5, 6, 15, 0.97);
+        backdrop-filter: blur(24px);
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 2rem;
+        z-index: 999;
+        opacity: 0;
+        transform: translateY(-10px);
+        transition:
+          opacity 0.3s,
+          transform 0.3s;
+        pointer-events: none;
+      }
+      .mobile-menu.open {
+        opacity: 1;
+        transform: none;
+        pointer-events: auto;
+      }
+      .mobile-menu a {
+        font-family: var(--font-head);
+        font-size: 2.2rem;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        text-decoration: none;
+        color: var(--white);
+        transition:
+          color 0.2s,
+          text-shadow 0.2s;
+      }
+      .mobile-menu a:hover {
+        color: var(--accent);
+        text-shadow: 0 0 20px rgba(255, 184, 0, 0.4);
+      }
+
+      /* ═══════════════════════════════
+       HERO
+    ═══════════════════════════════ */
+      .hero {
+        position: relative;
+        min-height: 100svh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        padding: calc(var(--nav-h) + 2rem) clamp(1.25rem, 5vw, 4rem) 4rem;
+      }
+
+      /* Hex dot grid canvas bg */
+      .hero-canvas {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.35;
+      }
+
+      /* Glow blobs */
+      .hero-glow {
+        position: absolute;
+        border-radius: 50%;
+        pointer-events: none;
+      }
+      .hero-glow-1 {
+        width: min(700px, 100vw);
+        height: min(700px, 100vw);
+        background: radial-gradient(
+          circle,
+          rgba(255, 184, 0, 0.14) 0%,
+          transparent 65%
+        );
+        top: -15%;
+        left: -10%;
+        filter: blur(60px);
+        animation: ghover1 16s ease-in-out infinite alternate;
+      }
+      .hero-glow-2 {
+        width: min(500px, 90vw);
+        height: min(500px, 90vw);
+        background: radial-gradient(
+          circle,
+          rgba(255, 51, 112, 0.12) 0%,
+          transparent 65%
+        );
+        bottom: 5%;
+        right: -5%;
+        filter: blur(70px);
+        animation: ghover2 20s ease-in-out infinite alternate;
+      }
+      .hero-glow-3 {
+        width: min(400px, 80vw);
+        height: min(400px, 80vw);
+        background: radial-gradient(
+          circle,
+          rgba(122, 255, 173, 0.08) 0%,
+          transparent 65%
+        );
+        top: 40%;
+        left: 45%;
+        transform: translate(-50%, -50%);
+        filter: blur(80px);
+        animation: ghover3 25s ease-in-out infinite alternate;
+      }
+
+      @keyframes ghover1 {
+        from {
+          transform: translate(0, 0);
+        }
+        to {
+          transform: translate(40px, 50px);
+        }
+      }
+      @keyframes ghover2 {
+        from {
+          transform: translate(0, 0);
+        }
+        to {
+          transform: translate(-50px, -30px);
+        }
+      }
+      @keyframes ghover3 {
+        from {
+          transform: translate(-50%, -50%) scale(1);
+        }
+        to {
+          transform: translate(-45%, -55%) scale(1.2);
+        }
+      }
+
+      /* Corner decorations */
+      .hero-corner {
+        position: absolute;
+        width: 60px;
+        height: 60px;
+        border-color: rgba(255, 184, 0, 0.3);
+        border-style: solid;
+        pointer-events: none;
+      }
+      .hero-corner.tl {
+        top: 2rem;
+        left: 2rem;
+        border-width: 1px 0 0 1px;
+      }
+      .hero-corner.tr {
+        top: 2rem;
+        right: 2rem;
+        border-width: 1px 1px 0 0;
+      }
+      .hero-corner.bl {
+        bottom: 2rem;
+        left: 2rem;
+        border-width: 0 0 1px 1px;
+      }
+      .hero-corner.br {
+        bottom: 2rem;
+        right: 2rem;
+        border-width: 0 1px 1px 0;
+      }
+
+      /* Horizontal rule lines */
+      .hero-hline {
+        position: absolute;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 184, 0, 0.2),
+          transparent
+        );
+        pointer-events: none;
+      }
+      .hero-hline.top {
+        top: calc(var(--nav-h) + 1px);
+      }
+      .hero-hline.bot {
+        bottom: 0;
+      }
+
+      /* ── Floating code fragments ── */
+      .hero-code-frag {
+        position: absolute;
+        font-family: var(--font-mono);
+        font-size: clamp(0.55rem, 1vw, 0.72rem);
+        color: rgba(255, 184, 0, 0.12);
+        pointer-events: none;
+        white-space: nowrap;
+        line-height: 1.7;
+        animation: fragFloat 18s ease-in-out infinite alternate;
+      }
+      .hero-code-frag:nth-child(1) {
+        top: 18%;
+        left: 3%;
+        animation-duration: 20s;
+      }
+      .hero-code-frag:nth-child(2) {
+        top: 62%;
+        left: 2%;
+        animation-duration: 24s;
+        animation-delay: -6s;
+      }
+      .hero-code-frag:nth-child(3) {
+        top: 22%;
+        right: 3%;
+        animation-duration: 22s;
+        animation-delay: -4s;
+      }
+      .hero-code-frag:nth-child(4) {
+        top: 68%;
+        right: 2%;
+        animation-duration: 19s;
+        animation-delay: -10s;
+      }
+      @keyframes fragFloat {
+        from {
+          transform: translateY(0px);
+          opacity: 0.7;
+        }
+        to {
+          transform: translateY(-18px);
+          opacity: 1;
+        }
+      }
+
+      /* ── Scroll indicator ── */
+      .hero-scroll {
+        position: absolute;
+        bottom: 2.5rem;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+        font-family: var(--font-mono);
+        font-size: 0.6rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--muted);
+        animation: fadeInUp 0.8s ease 1.6s both;
+      }
+      .scroll-line {
+        width: 1px;
+        height: 40px;
+        background: linear-gradient(to bottom, var(--accent), transparent);
+        animation: scrollPulse 1.8s ease-in-out infinite;
+      }
+      @keyframes scrollPulse {
+        0%,
+        100% {
+          opacity: 0.3;
+          transform: scaleY(1);
+        }
+        50% {
+          opacity: 1;
+          transform: scaleY(1.1);
+        }
+      }
+
+      /* ── Hero content wrapper ── */
+      .hero-content {
+        position: relative;
+        z-index: 2;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        max-width: 860px;
+        width: 100%;
+        gap: 0;
+      }
+
+      /* ── Badge ── */
+      .hero-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        font-family: var(--font-mono);
+        font-size: 0.72rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--accent);
+        border: 1px solid rgba(255, 184, 0, 0.25);
+        padding: 0.38rem 1rem;
+        background: rgba(255, 184, 0, 0.05);
+        clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
+        margin-bottom: 2rem;
+        animation: fadeInDown 0.7s ease 0.1s both;
+      }
+      .hero-badge-dot {
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: var(--accent-3);
+        box-shadow: 0 0 6px var(--accent-3);
+        animation: blink 1.8s ease-in-out infinite;
+      }
+
+      /* ── Eyebrow role label ── */
+      .hero-role {
+        font-family: var(--font-mono);
+        font-size: clamp(0.7rem, 1.5vw, 0.85rem);
+        color: var(--accent-2);
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        margin-bottom: 0.75rem;
+        animation: fadeInUp 0.7s ease 0.25s both;
+      }
+
+      /* ── Name headline ── */
+      .hero-name {
+        font-family: var(--font-head);
+        font-size: clamp(3.8rem, 10vw, 9rem);
+        font-weight: 700;
+        line-height: 0.92;
+        letter-spacing: -0.01em;
+        text-transform: uppercase;
+        color: var(--white);
+        margin-bottom: 1.5rem;
+        animation: fadeInUp 0.8s ease 0.35s both;
+      }
+      .hero-name .line-1 {
+        display: block;
+      }
+      .hero-name .line-2 {
+        display: block;
+        -webkit-text-stroke: 1.5px rgba(255, 184, 0, 0.6);
+        color: transparent;
+        position: relative;
+      }
+      /* Glitch flicker on last name */
+      .hero-name .line-2 {
+        animation:
+          fadeInUp 0.8s ease 0.35s both,
+          glitch 6s ease 2s infinite;
+      }
+      @keyframes glitch {
+        0%,
+        94%,
+        100% {
+          -webkit-text-stroke-color: rgba(255, 184, 0, 0.6);
+          transform: none;
+        }
+        95% {
+          -webkit-text-stroke-color: rgba(255, 51, 112, 0.9);
+          transform: translate(-2px, 0);
+        }
+        96% {
+          -webkit-text-stroke-color: rgba(122, 255, 173, 0.9);
+          transform: translate(2px, 0);
+        }
+        97% {
+          -webkit-text-stroke-color: rgba(255, 184, 0, 0.6);
+          transform: none;
+        }
+      }
+
+      /* ── One-liner description ── */
+      .hero-desc {
+        font-family: var(--font-body);
+        font-size: clamp(0.95rem, 2vw, 1.1rem);
+        font-weight: 300;
+        color: rgba(232, 240, 255, 0.55);
+        max-width: 56ch;
+        line-height: 1.7;
+        margin-bottom: 2.5rem;
+        animation: fadeInUp 0.7s ease 0.55s both;
+      }
+      .hero-desc em {
+        font-style: normal;
+        color: rgba(232, 240, 255, 0.85);
+        font-weight: 400;
+      }
+
+      /* ── Buttons ── */
+      .hero-btns {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-bottom: 3rem;
+        animation: fadeInUp 0.7s ease 0.7s both;
+      }
+
+      .btn-primary {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.55rem;
+        font-family: var(--font-mono);
+        font-size: 0.8rem;
+        font-weight: 500;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        text-decoration: none;
+        color: var(--bg);
+        background: var(--accent);
+        padding: 0.75rem 1.8rem;
+        clip-path: polygon(12px 0%, 100% 0%, calc(100% - 12px) 100%, 0% 100%);
+        transition:
+          background 0.25s,
+          box-shadow 0.25s,
+          transform 0.2s;
+        position: relative;
+        overflow: hidden;
+      }
+      .btn-primary::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.2),
+          transparent
+        );
+        opacity: 0;
+        transition: opacity 0.25s;
+      }
+      .btn-primary:hover {
+        background: #ffc933;
+        box-shadow:
+          0 0 30px rgba(255, 184, 0, 0.45),
+          0 0 60px rgba(255, 184, 0, 0.15);
+        transform: translateY(-2px);
+      }
+      .btn-primary:hover::before {
+        opacity: 1;
+      }
+
+      .btn-secondary {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.55rem;
+        font-family: var(--font-mono);
+        font-size: 0.8rem;
+        font-weight: 500;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        text-decoration: none;
+        color: var(--white);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        padding: 0.75rem 1.8rem;
+        clip-path: polygon(12px 0%, 100% 0%, calc(100% - 12px) 100%, 0% 100%);
+        background: rgba(255, 255, 255, 0.04);
+        transition:
+          border-color 0.25s,
+          background 0.25s,
+          transform 0.2s;
+      }
+      .btn-secondary:hover {
+        border-color: rgba(255, 255, 255, 0.5);
+        background: rgba(255, 255, 255, 0.08);
+        transform: translateY(-2px);
+      }
+      .btn-icon {
+        width: 14px;
+        height: 14px;
+        flex-shrink: 0;
+        fill: currentColor;
+      }
+
+      /* ── Tech tags row ── */
+      .hero-tags {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.5rem;
+        animation: fadeInUp 0.7s ease 0.9s both;
+      }
+      .hero-tag {
+        font-family: var(--font-mono);
+        font-size: 0.65rem;
+        letter-spacing: 0.08em;
+        color: var(--muted);
+        border: 1px solid var(--border-w);
+        padding: 0.28rem 0.75rem;
+        border-radius: 2px;
+        background: rgba(255, 255, 255, 0.02);
+        transition:
+          color 0.2s,
+          border-color 0.2s;
+      }
+      .hero-tag:hover {
+        color: var(--accent);
+        border-color: rgba(255, 184, 0, 0.3);
+      }
+
+      /* ── Stats row ── */
+      .hero-stats {
+        display: flex;
+        gap: clamp(1.5rem, 4vw, 3.5rem);
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-bottom: 2.5rem;
+        animation: fadeInUp 0.7s ease 0.8s both;
+      }
+      .stat-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.1rem;
+      }
+      .stat-num {
+        font-family: var(--font-head);
+        font-size: clamp(1.6rem, 3vw, 2.2rem);
+        font-weight: 700;
+        color: var(--white);
+        line-height: 1;
+      }
+      .stat-num .stat-accent {
+        color: var(--accent);
+      }
+      .stat-label {
+        font-family: var(--font-mono);
+        font-size: 0.62rem;
+        color: var(--muted);
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+      .stat-divider {
+        width: 1px;
+        align-self: stretch;
+        background: var(--border-w);
+      }
+
+      /* ── Shared fade animations ── */
+      @keyframes fadeInDown {
+        from {
+          opacity: 0;
+          transform: translateY(-16px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* ── Responsive ── */
+      @media (max-width: 640px) {
+        .hero-name {
+          letter-spacing: -0.02em;
+        }
+        .hero-code-frag {
+          display: none;
+        }
+        .stat-divider {
+          display: none;
+        }
+        .hero-stats {
+          gap: 1.5rem;
+        }
+        .btn-primary,
+        .btn-secondary {
+          font-size: 0.72rem;
+          padding: 0.65rem 1.3rem;
+        }
+      }
+
+      /* ═══════════════════════════════
+       ABOUT
+    ═══════════════════════════════ */
+      .about {
+        position: relative;
+        padding: clamp(5rem, 10vw, 9rem) clamp(1.25rem, 5vw, 4rem);
+        overflow: hidden;
+      }
+
+      /* faint diagonal stripe texture */
+      .about::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: repeating-linear-gradient(
+          -55deg,
+          transparent,
+          transparent 60px,
+          rgba(255, 184, 0, 0.018) 60px,
+          rgba(255, 184, 0, 0.018) 61px
+        );
+        pointer-events: none;
+      }
+
+      /* top separator line */
+      .about::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 184, 0, 0.25) 40%,
+          rgba(255, 51, 112, 0.2) 60%,
+          transparent
+        );
+      }
+
+      .about-inner {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      /* ── Section label ── */
+      .section-label {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        font-family: var(--font-mono);
+        font-size: 0.68rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin-bottom: 1rem;
+        opacity: 0;
+        transform: translateY(14px);
+        transition:
+          opacity 0.6s ease,
+          transform 0.6s ease;
+      }
+      .section-label.in-view {
+        opacity: 1;
+        transform: none;
+      }
+      .section-label::before {
+        content: "";
+        display: block;
+        width: 28px;
+        height: 1px;
+        background: var(--accent);
+        opacity: 0.6;
+      }
+
+      /* ── Two-column layout ── */
+      .about-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: clamp(3rem, 6vw, 7rem);
+        align-items: start;
+      }
+
+      /* ── Left: bio ── */
+      .about-left {
+      }
+
+      .about-heading {
+        font-family: var(--font-head);
+        font-size: clamp(2.4rem, 5vw, 4rem);
+        font-weight: 700;
+        line-height: 0.95;
+        letter-spacing: -0.01em;
+        text-transform: uppercase;
+        margin-bottom: 1.75rem;
+        opacity: 0;
+        transform: translateY(18px);
+        transition:
+          opacity 0.65s ease 0.1s,
+          transform 0.65s ease 0.1s;
+      }
+      .about-heading.in-view {
+        opacity: 1;
+        transform: none;
+      }
+      .about-heading .outline {
+        -webkit-text-stroke: 1.5px rgba(255, 184, 0, 0.5);
+        color: transparent;
+      }
+
+      .about-bio {
+        font-family: var(--font-body);
+        font-size: clamp(0.95rem, 1.6vw, 1.05rem);
+        font-weight: 300;
+        color: rgba(232, 240, 255, 0.55);
+        line-height: 1.85;
+        margin-bottom: 1.4rem;
+        opacity: 0;
+        transform: translateY(16px);
+        transition:
+          opacity 0.65s ease 0.2s,
+          transform 0.65s ease 0.2s;
+      }
+      .about-bio.in-view {
+        opacity: 1;
+        transform: none;
+      }
+      .about-bio em {
+        font-style: normal;
+        color: var(--white);
+        font-weight: 400;
+      }
+      .about-bio strong {
+        color: var(--accent);
+        font-weight: 500;
+      }
+
+      /* Signature / identity strip */
+      .about-identity {
+        display: flex;
+        align-items: center;
+        gap: 1.2rem;
+        padding: 1rem 1.25rem;
+        border: 1px solid var(--border-w);
+        border-left: 2px solid var(--accent);
+        background: rgba(255, 184, 0, 0.03);
+        margin-top: 1.75rem;
+        opacity: 0;
+        transform: translateY(14px);
+        transition:
+          opacity 0.6s ease 0.35s,
+          transform 0.6s ease 0.35s;
+      }
+      .about-identity.in-view {
+        opacity: 1;
+        transform: none;
+      }
+      .about-avatar {
+        width: 48px;
+        height: 48px;
+        border-radius: 4px;
+        background: linear-gradient(
+          135deg,
+          rgba(255, 184, 0, 0.25),
+          rgba(255, 51, 112, 0.2)
+        );
+        border: 1px solid rgba(255, 184, 0, 0.3);
+        display: grid;
+        place-items: center;
+        flex-shrink: 0;
+        font-family: var(--font-head);
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: var(--accent);
+        letter-spacing: 0.04em;
+      }
+      .about-identity-text {
+      }
+      .about-identity-name {
+        font-family: var(--font-head);
+        font-size: 1rem;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        color: var(--white);
+      }
+      .about-identity-role {
+        font-family: var(--font-mono);
+        font-size: 0.68rem;
+        color: var(--muted);
+        letter-spacing: 0.08em;
+      }
+      .about-identity-loc {
+        margin-left: auto;
+        font-family: var(--font-mono);
+        font-size: 0.66rem;
+        color: var(--muted);
+        display: flex;
+        align-items: center;
+        gap: 0.3rem;
+      }
+      .about-identity-loc svg {
+        width: 10px;
+        height: 10px;
+        fill: var(--accent-2);
+        flex-shrink: 0;
+      }
+
+      /* ── Right: stats + skills ── */
+      .about-right {
+      }
+
+      /* Project / stat cards */
+      .about-stat-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.75rem;
+        margin-bottom: 2rem;
+      }
+
+      .stat-card {
+        position: relative;
+        padding: 1.4rem 1.25rem;
+        border: 1px solid var(--border-w);
+        background: var(--bg-3);
+        overflow: hidden;
+        opacity: 0;
+        transform: translateY(18px);
+        transition:
+          opacity 0.55s ease,
+          transform 0.55s ease,
+          border-color 0.25s,
+          box-shadow 0.25s;
+        cursor: default;
+      }
+      .stat-card.in-view {
+        opacity: 1;
+        transform: none;
+      }
+      .stat-card:nth-child(1) {
+        transition-delay: 0.1s;
+      }
+      .stat-card:nth-child(2) {
+        transition-delay: 0.2s;
+      }
+      .stat-card:nth-child(3) {
+        transition-delay: 0.3s;
+      }
+      .stat-card:nth-child(4) {
+        transition-delay: 0.4s;
+      }
+
+      .stat-card:hover {
+        border-color: rgba(255, 184, 0, 0.2);
+        box-shadow:
+          0 0 24px rgba(255, 184, 0, 0.06),
+          inset 0 0 24px rgba(255, 184, 0, 0.03);
+      }
+      /* accent bar */
+      .stat-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: linear-gradient(90deg, var(--accent), transparent);
+        opacity: 0;
+        transition: opacity 0.3s;
+      }
+      .stat-card:hover::before {
+        opacity: 1;
+      }
+      /* corner glow */
+      .stat-card::after {
+        content: "";
+        position: absolute;
+        bottom: -20px;
+        right: -20px;
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        background: radial-gradient(
+          circle,
+          rgba(255, 184, 0, 0.08),
+          transparent 70%
+        );
+        opacity: 0;
+        transition: opacity 0.3s;
+      }
+      .stat-card:hover::after {
+        opacity: 1;
+      }
+
+      .stat-card-icon {
+        width: 28px;
+        height: 28px;
+        margin-bottom: 0.8rem;
+        fill: var(--accent);
+        opacity: 0.7;
+      }
+      .stat-card-num {
+        font-family: var(--font-head);
+        font-size: 2.6rem;
+        font-weight: 700;
+        line-height: 1;
+        color: var(--white);
+        letter-spacing: -0.02em;
+      }
+      .stat-card-num sup {
+        font-size: 1.2rem;
+        color: var(--accent);
+        vertical-align: super;
+        font-weight: 600;
+      }
+      .stat-card-label {
+        font-family: var(--font-mono);
+        font-size: 0.66rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-top: 0.3rem;
+      }
+
+      /* ── Skills list ── */
+      .skills-heading {
+        font-family: var(--font-mono);
+        font-size: 0.68rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-bottom: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+        opacity: 0;
+        transform: translateY(10px);
+        transition:
+          opacity 0.5s ease 0.45s,
+          transform 0.5s ease 0.45s;
+      }
+      .skills-heading.in-view {
+        opacity: 1;
+        transform: none;
+      }
+      .skills-heading::after {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: var(--border-w);
+      }
+
+      .skills-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.55rem;
+        opacity: 0;
+        transform: translateY(10px);
+        transition:
+          opacity 0.55s ease 0.5s,
+          transform 0.55s ease 0.5s;
+      }
+      .skills-list.in-view {
+        opacity: 1;
+        transform: none;
+      }
+
+      .skill-pill {
+        font-family: var(--font-mono);
+        font-size: 0.72rem;
+        letter-spacing: 0.06em;
+        color: rgba(232, 240, 255, 0.7);
+        border: 1px solid var(--border-w);
+        padding: 0.38rem 0.9rem;
+        background: rgba(255, 255, 255, 0.03);
+        border-radius: 2px;
+        transition:
+          color 0.2s,
+          border-color 0.2s,
+          background 0.2s;
+        cursor: default;
+      }
+      .skill-pill:hover {
+        color: var(--accent);
+        border-color: rgba(255, 184, 0, 0.35);
+        background: rgba(255, 184, 0, 0.06);
+      }
+
+      /* ── Responsive ── */
+      @media (max-width: 860px) {
+        .about-grid {
+          grid-template-columns: 1fr;
+          gap: 3rem;
+        }
+      }
+
+      /* ═══════════════════════════════
+       PROJECTS
+    ═══════════════════════════════ */
+      .projects {
+        position: relative;
+        padding: clamp(5rem, 10vw, 9rem) clamp(1.25rem, 5vw, 4rem);
+        background: var(--bg-2);
+        overflow: hidden;
+      }
+      .projects::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 184, 0, 0.25) 40%,
+          rgba(255, 51, 112, 0.2) 60%,
+          transparent
+        );
+      }
+      .projects-inner {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .projects-header {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        gap: 1.5rem;
+        flex-wrap: wrap;
+        margin-bottom: 3.5rem;
+      }
+      .projects-heading {
+        font-family: var(--font-head);
+        font-size: clamp(2.2rem, 4.5vw, 3.6rem);
+        font-weight: 700;
+        line-height: 0.95;
+        letter-spacing: -0.01em;
+        text-transform: uppercase;
+        opacity: 0;
+        transform: translateY(18px);
+        transition:
+          opacity 0.65s ease 0.1s,
+          transform 0.65s ease 0.1s;
+      }
+      .projects-heading.in-view {
+        opacity: 1;
+        transform: none;
+      }
+      .projects-heading .outline {
+        -webkit-text-stroke: 1.5px rgba(255, 184, 0, 0.5);
+        color: transparent;
+      }
+
+      .projects-filter {
+        display: flex;
+        gap: 0.45rem;
+        flex-wrap: wrap;
+        opacity: 0;
+        transform: translateY(12px);
+        transition:
+          opacity 0.55s ease 0.25s,
+          transform 0.55s ease 0.25s;
+      }
+      .projects-filter.in-view {
+        opacity: 1;
+        transform: none;
+      }
+      .filter-btn {
+        font-family: var(--font-mono);
+        font-size: 0.68rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--muted);
+        border: 1px solid var(--border-w);
+        background: none;
+        padding: 0.35rem 0.85rem;
+        cursor: pointer;
+        border-radius: 2px;
+        transition:
+          color 0.2s,
+          border-color 0.2s,
+          background 0.2s;
+      }
+      .filter-btn:hover,
+      .filter-btn.active {
+        color: var(--accent);
+        border-color: rgba(255, 184, 0, 0.4);
+        background: rgba(255, 184, 0, 0.07);
+      }
+
+      /* ── Project cards grid ── */
+      .projects-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.25rem;
+      }
+      @media (max-width: 960px) {
+        .projects-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      @media (max-width: 560px) {
+        .projects-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .project-card {
+        background: var(--bg-3);
+        border: 1px solid var(--border-w);
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        opacity: 0;
+        transform: translateY(22px);
+        transition:
+          opacity 0.55s ease,
+          transform 0.55s ease,
+          border-color 0.25s,
+          box-shadow 0.25s;
+        cursor: default;
+      }
+      .project-card.in-view {
+        opacity: 1;
+        transform: none;
+      }
+      .project-card:nth-child(1) {
+        transition-delay: 0.05s;
+      }
+      .project-card:nth-child(2) {
+        transition-delay: 0.12s;
+      }
+      .project-card:nth-child(3) {
+        transition-delay: 0.19s;
+      }
+      .project-card:nth-child(4) {
+        transition-delay: 0.26s;
+      }
+      .project-card:nth-child(5) {
+        transition-delay: 0.33s;
+      }
+      .project-card:nth-child(6) {
+        transition-delay: 0.4s;
+      }
+      .project-card:hover {
+        border-color: rgba(255, 184, 0, 0.22);
+        box-shadow:
+          0 8px 40px rgba(0, 0, 0, 0.4),
+          0 0 0 1px rgba(255, 184, 0, 0.06);
+        transform: translateY(-4px);
+      }
+      .project-card.in-view:hover {
+        transform: translateY(-4px);
+      }
+
+      /* card art / thumbnail */
+      .card-art {
+        height: 165px;
+        position: relative;
+        overflow: hidden;
+        flex-shrink: 0;
+      }
+      .card-art-bg {
+        position: absolute;
+        inset: 0;
+        background-size: cover;
+        background-position: center;
+        transition: transform 0.5s ease;
+      }
+      .project-card:hover .card-art-bg {
+        transform: scale(1.06);
+      }
+      .card-art-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          to bottom,
+          transparent 30%,
+          var(--bg-3) 100%
+        );
+      }
+      .card-genre-badge {
+        position: absolute;
+        top: 0.75rem;
+        left: 0.75rem;
+        font-family: var(--font-mono);
+        font-size: 0.6rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        padding: 0.22rem 0.65rem;
+        border-radius: 2px;
+        z-index: 11;
+      }
+      .card-featured {
+        position: absolute;
+        top: 0.75rem;
+        right: 0.75rem;
+        font-family: var(--font-mono);
+        font-size: 0.58rem;
+        letter-spacing: 0.1em;
+        color: var(--accent);
+        border: 1px solid rgba(255, 184, 0, 0.4);
+        padding: 0.18rem 0.55rem;
+        background: rgba(255, 184, 0, 0.08);
+        z-index: 11;
+      }
+
+      /* card body */
+      .card-body {
+        padding: 1.1rem 1.2rem 1.3rem;
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        gap: 0.55rem;
+      }
+      .card-title {
+        font-family: var(--font-head);
+        font-size: 1.25rem;
+        font-weight: 700;
+        letter-spacing: 0.02em;
+        text-transform: uppercase;
+        color: var(--white);
+        line-height: 1.1;
+      }
+      .card-desc {
+        font-family: var(--font-body);
+        font-size: 0.82rem;
+        font-weight: 300;
+        color: rgba(232, 240, 255, 0.5);
+        line-height: 1.65;
+        flex: 1;
+      }
+      .card-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.35rem;
+        margin-top: 0.2rem;
+      }
+      .card-tag {
+        font-family: var(--font-mono);
+        font-size: 0.6rem;
+        letter-spacing: 0.06em;
+        color: var(--muted);
+        border: 1px solid var(--border-w);
+        padding: 0.18rem 0.55rem;
+        border-radius: 1px;
+      }
+      .card-footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-top: 0.75rem;
+        border-top: 1px solid var(--border-w);
+        margin-top: auto;
+      }
+      .card-platforms {
+        display: flex;
+        gap: 0.4rem;
+        align-items: center;
+      }
+      .platform-chip {
+        font-family: var(--font-mono);
+        font-size: 0.58rem;
+        letter-spacing: 0.06em;
+        color: rgba(232, 240, 255, 0.35);
+      }
+      .card-link {
+        font-family: var(--font-mono);
+        font-size: 0.65rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--accent);
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 0.3rem;
+        transition:
+          gap 0.2s,
+          opacity 0.2s;
+        opacity: 0.7;
+      }
+      .card-link:hover {
+        gap: 0.5rem;
+        opacity: 1;
+      }
+      .card-link svg {
+        width: 10px;
+        height: 10px;
+        fill: currentColor;
+      }
+      .card-github {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        font-family: var(--font-mono);
+        font-size: 0.65rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--white);
+        text-decoration: none;
+        padding: 0.32rem 0.75rem;
+        border: 1px solid var(--border-w);
+        background: rgba(255, 255, 255, 0.04);
+        clip-path: polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%);
+        transition:
+          color 0.2s,
+          border-color 0.2s,
+          background 0.2s,
+          box-shadow 0.2s;
+        opacity: 0.75;
+      }
+      .card-github:hover {
+        color: var(--accent);
+        border-color: rgba(255, 184, 0, 0.4);
+        background: rgba(255, 184, 0, 0.08);
+        box-shadow: 0 0 10px rgba(255, 184, 0, 0.15);
+        opacity: 1;
+      }
+      .card-github svg {
+        width: 11px;
+        height: 11px;
+        fill: currentColor;
+        flex-shrink: 0;
+      }
+      .card-footer-actions {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+      }
+
+      /* ═══════════════════════════════
+       FOOTER
+    ═══════════════════════════════ */
+      footer {
+        background: var(--bg-2);
+        border-top: 1px solid var(--border);
+        padding: 4rem clamp(1.25rem, 5vw, 4rem) 2rem;
+        position: relative;
+      }
+
+      footer::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(
+          90deg,
+          transparent 0%,
+          var(--accent) 30%,
+          var(--accent-2) 70%,
+          transparent 100%
+        );
+        opacity: 0.4;
+      }
+
+      .footer-inner {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 1.5fr 1fr;
+        gap: 2.5rem;
+      }
+
+      /* Brand */
+      .footer-brand .logo {
+        font-family: var(--font-head);
+        font-size: 1.3rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--white);
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-bottom: 1rem;
+        text-decoration: none;
+      }
+      .footer-brand .logo .accent-text {
+        color: var(--accent);
+      }
+      .footer-brand .logo .logo-icon-sm {
+        width: 22px;
+        height: 22px;
+        fill: var(--accent);
+        filter: drop-shadow(0 0 4px rgba(255, 184, 0, 0.6));
+      }
+      .footer-brand p {
+        font-size: 0.875rem;
+        color: var(--muted);
+        max-width: 24ch;
+        line-height: 1.8;
+        font-family: var(--font-mono);
+        font-size: 0.78rem;
+      }
+
+      /* Status badge */
+      .status-badge {
+        margin-top: 1.25rem;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-family: var(--font-mono);
+        font-size: 0.7rem;
+        color: var(--accent-3);
+        letter-spacing: 0.06em;
+      }
+      .status-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--accent-3);
+        box-shadow: 0 0 6px var(--accent-3);
+        animation: blink 1.8s ease-in-out infinite;
+      }
+      @keyframes blink {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.2;
+        }
+      }
+
+      /* Columns */
+      .footer-col h4 {
+        font-family: var(--font-mono);
+        font-size: 0.68rem;
+        font-weight: 500;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin-bottom: 1.2rem;
+        opacity: 0.8;
+      }
+      .footer-col ul {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 0.7rem;
+      }
+      .footer-col a {
+        font-size: 0.875rem;
+        color: rgba(232, 240, 255, 0.45);
+        text-decoration: none;
+        transition:
+          color 0.2s,
+          padding-left 0.2s;
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+      }
+      .footer-col a::before {
+        content: "›";
+        color: var(--accent);
+        opacity: 0;
+        font-size: 0.9rem;
+        transition: opacity 0.2s;
+      }
+      .footer-col a:hover {
+        color: var(--white);
+        padding-left: 0.3rem;
+      }
+      .footer-col a:hover::before {
+        opacity: 0.7;
+      }
+
+      /* Bottom bar */
+      .footer-bottom {
+        max-width: 1200px;
+        margin: 2.5rem auto 0;
+        padding-top: 1.75rem;
+        border-top: 1px solid var(--border-w);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        flex-wrap: wrap;
+      }
+      .footer-bottom p {
+        font-family: var(--font-mono);
+        font-size: 0.72rem;
+        color: var(--muted);
+        letter-spacing: 0.04em;
+      }
+      .footer-bottom p span {
+        color: var(--accent);
+      }
+
+      /* Social links */
+      .social-links {
+        display: flex;
+        gap: 0.6rem;
+      }
+      .social-links a {
+        display: grid;
+        place-items: center;
+        width: 36px;
+        height: 36px;
+        border: 1px solid var(--border-w);
+        color: var(--muted);
+        text-decoration: none;
+        clip-path: polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%);
+        transition:
+          color 0.2s,
+          border-color 0.2s,
+          background 0.2s,
+          box-shadow 0.2s;
+      }
+      .social-links a:hover {
+        color: var(--accent);
+        border-color: var(--accent);
+        background: rgba(255, 184, 0, 0.08);
+        box-shadow: 0 0 12px rgba(255, 184, 0, 0.2);
+      }
+      .social-links svg {
+        width: 14px;
+        height: 14px;
+        fill: currentColor;
+      }
+
+      /* ═══════════════════════════════
+       RESPONSIVE
+    ═══════════════════════════════ */
+      @media (max-width: 900px) {
+        .footer-inner {
+          grid-template-columns: 1fr;
+        }
+      }
+      @media (max-width: 640px) {
+        .nav-links,
+        .nav-cta {
+          display: none;
+        }
+        .hamburger {
+          display: flex;
+        }
+        .mobile-menu {
+          display: flex;
+        }
+        .footer-inner {
+          grid-template-columns: 1fr;
+        }
+        .hero-corner {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ─── NAVBAR ─── -->
+    <nav class="navbar scrolled" id="navbar">
+      <a href="file:///D:/Opera_Download/Portfolio_gif.html#" class="nav-logo">
+        <span class="logo-icon">
+          <!-- Gamepad icon -->
+          <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="4" y="10" width="24" height="14" rx="7" fill="none" stroke="#ffb800" stroke-width="1.5"></rect>
+            <line x1="10" y1="17" x2="14" y2="17" stroke="#ffb800" stroke-width="1.5" stroke-linecap="round"></line>
+            <line x1="12" y1="15" x2="12" y2="19" stroke="#ffb800" stroke-width="1.5" stroke-linecap="round"></line>
+            <circle cx="20" cy="15.5" r="1" fill="#ff3370"></circle>
+            <circle cx="22.5" cy="18" r="1" fill="#7affad"></circle>
+            <rect x="14.5" y="13" width="3" height="1.5" rx=".75" fill="#ffb800" opacity=".5"></rect>
+          </svg>
+        </span>
+        <span>Dev<span class="accent-text">Forge</span></span>
+      </a>
+
+      <ul class="nav-links">
+        <li>
+          <a href="file:///D:/Opera_Download/Portfolio_gif.html#projects"><span class="num">01.</span> Games</a>
+        </li>
+        <li>
+          <a href="file:///D:/Opera_Download/Portfolio_gif.html#about"><span class="num">02.</span> About</a>
+        </li>
+        <li>
+          <a href="file:///D:/Opera_Download/Portfolio_gif.html#contact"><span class="num">03.</span> Contact</a>
+        </li>
+      </ul>
+
+      <a href="file:///D:/Opera_Download/Portfolio_gif.html#contact" class="nav-cta">Hire Me</a>
+
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+
+    <!-- Mobile menu -->
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="file:///D:/Opera_Download/Portfolio_gif.html#projects" onclick="closeMobile()">Games</a>
+      <a href="file:///D:/Opera_Download/Portfolio_gif.html#about" onclick="closeMobile()">About</a>
+      <a href="file:///D:/Opera_Download/Portfolio_gif.html#contact" onclick="closeMobile()">Contact</a>
+      <a href="file:///D:/Opera_Download/Portfolio_gif.html#contact" onclick="closeMobile()">Hire Me</a>
+    </div>
+
+    <!-- ─── HERO ─── -->
+    <section class="hero" id="hero">
+      <canvas class="hero-canvas" id="heroCanvas" width="1684" height="896"></canvas>
+      <div class="hero-glow hero-glow-1"></div>
+      <div class="hero-glow hero-glow-2"></div>
+      <div class="hero-glow hero-glow-3"></div>
+      <div class="hero-corner tl"></div>
+      <div class="hero-corner tr"></div>
+      <div class="hero-corner bl"></div>
+      <div class="hero-corner br"></div>
+      <div class="hero-hline top"></div>
+      <div class="hero-hline bot"></div>
+
+      <!-- Floating code fragments -->
+      <div class="hero-code-frag">
+        void OnUpdate(float delta) {<br>&nbsp;&nbsp;physics.Step(delta);<br>&nbsp;&nbsp;renderer.Flush();<br>}
+      </div>
+      <div class="hero-code-frag">
+        [SerializeField]<br>float moveSpeed = 8f;<br>float jumpForce = 14f;
+      </div>
+      <div class="hero-code-frag">
+        UFUNCTION(BlueprintCallable)<br>void TakeDamage(float dmg,<br>&nbsp;&nbsp;AActor*
+        src) override;
+      </div>
+      <div class="hero-code-frag">
+        shader "Hologram" {<br>&nbsp;&nbsp;_ScanSpeed ("Scan", Float)<br>&nbsp;&nbsp;_RimColor
+        ("Rim", Color)<br>}
+      </div>
+
+      <!-- Hero content -->
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span class="hero-badge-dot"></span>
+          Game Programmer &nbsp;·&nbsp; Open to Work
+        </div>
+
+        <p class="hero-role">
+          Unity &nbsp;·&nbsp; C# &nbsp;·&nbsp; Gameplay Programmer
+        </p>
+
+        <h1 class="hero-name">
+          <span class="line-1">Mithran</span>
+          <span class="line-2">Saini</span>
+        </h1>
+
+        <p class="hero-desc">
+          Learning Game development while
+          <em> creating immersive gameplay systems and prototypes</em> ganing
+          real world experince &amp; turning ambitious design docs into playable
+          reality.
+        </p>
+
+        <div class="hero-btns">
+          <a href="file:///D:/Opera_Download/Portfolio_gif.html#contact" class="btn-primary">
+            <svg class="btn-icon" viewBox="0 0 24 24">
+              <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"></path>
+            </svg>
+            Let's Work Together
+          </a>
+          <a href="file:///D:/Opera_Download/Portfolio_gif.html#projects" class="btn-secondary">
+            View Portfolio
+            <svg class="btn-icon" viewBox="0 0 24 24">
+              <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"></path>
+            </svg>
+          </a>
+        </div>
+
+        <div class="hero-stats">
+          <div class="stat-item">
+            <span class="stat-num">10<span class="stat-accent">+</span></span>
+            <span class="stat-label">Prototypes</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat-item">
+            <span class="stat-num">Fre<span class="stat-accent">sher</span></span>
+            <span class="stat-label">ready to be molded</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat-item">
+            <span class="stat-num">2<span class="stat-accent"> complete</span></span>
+            <span class="stat-label">games build</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat-item">
+            <span class="stat-num">10<span class="stat-accent">+</span></span>
+            <span class="stat-label">WebGL builds </span>
+          </div>
+        </div>
+
+        <div class="hero-tags">
+          <span class="hero-tag">Unity 2D</span>
+          <span class="hero-tag">Unity 3D</span>
+          <span class="hero-tag">C#</span>
+          <span class="hero-tag">Gameplay programmer</span>
+          <span class="hero-tag">Gameplay Systems</span>
+          <span class="hero-tag">AWS Certified</span>
+          <span class="hero-tag">Soluiton Architech</span>
+        </div>
+      </div>
+
+      <div class="hero-scroll">
+        <div class="scroll-line"></div>
+        Scroll
+      </div>
+    </section>
+
+    <!-- ─── ABOUT ─── -->
+    <section class="about" id="about">
+      <div class="about-inner">
+        <span class="section-label js-reveal">02. About Me</span>
+
+        <div class="about-grid">
+          <!-- ── Left: Bio ── -->
+          <div class="about-left">
+            <h2 class="about-heading js-reveal">
+              The Dev<br>
+              <span class="outline">Behind</span><br>
+              The Game
+            </h2>
+
+            <p class="about-bio js-reveal">
+              I'm <em>Mithran Saini</em> — a game programmer with
+              <strong>Hands-on</strong> experience building the systems that
+              make games feel alive. Skilled in<em>
+                gameplay programming, game state management, UI systems,
+                physics-based mechanics, collision detection,animation
+                integration, and WebGL deploymen
+              </em>
+              , I obsess over the code that players <em>feel</em> without ever
+              seeing.
+            </p>
+            <p class="about-bio js-reveal" style="transition-delay: 0.28s">
+              I've applied software engineering best practices,<strong>
+                OOP design, and performance optimization
+              </strong>
+              to every project i have worked on, I bring the same obsessive
+              attention to performance and player experience.
+            </p>
+
+            <div class="about-identity js-reveal">
+              <div class="about-avatar">MS</div>
+              <div class="about-identity-text">
+                <div class="about-identity-name">Mithran Saini</div>
+                <div class="about-identity-role">Fresher Game Programmer</div>
+              </div>
+              <div class="about-identity-loc">
+                <svg viewBox="0 0 24 24">
+                  <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"></path>
+                </svg>
+                Delhi, India
+              </div>
+            </div>
+          </div>
+
+          <!-- ── Right: Stats + Skills ── -->
+          <div class="about-right">
+            <!-- Stat cards -->
+            <div class="about-stat-grid">
+              <div class="stat-card js-reveal">
+                <svg class="stat-card-icon" viewBox="0 0 24 24">
+                  <path d="M21 3H3c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h5v2h8v-2h5c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 14H3V5h18v12z"></path>
+                </svg>
+                <div class="stat-card-num">10<sup>+</sup></div>
+                <div class="stat-card-label">Prototypes</div>
+              </div>
+
+              <div class="stat-card js-reveal">
+                <svg class="stat-card-icon" viewBox="0 0 24 24">
+                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
+                </svg>
+                <div class="stat-card-num">2<sup>+</sup></div>
+                <div class="stat-card-label">Games build</div>
+              </div>
+
+              <div class="stat-card js-reveal">
+                <svg class="stat-card-icon" viewBox="0 0 24 24">
+                  <path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"></path>
+                </svg>
+                <div class="stat-card-num">10<sup>+</sup></div>
+                <div class="stat-card-label">Core Skills</div>
+              </div>
+            </div>
+
+            <!-- Skills -->
+            <p class="skills-heading js-reveal">Core Skills</p>
+
+            <div class="skills-list js-reveal">
+              <span class="skill-pill">Unity 2D</span>
+              <span class="skill-pill">Unity 3D</span>
+              <span class="skill-pill">Unity 6</span>
+              <span class="skill-pill">C# / Scripting</span>
+              <span class="skill-pill">State Machine</span>
+              <span class="skill-pill">Physics Systems</span>
+              <span class="skill-pill">Gameplay Prototyping</span>
+              <span class="skill-pill">Git / GitHub</span>
+              <span class="skill-pill">Version Control</span>
+              <span class="skill-pill">UI System</span>
+              <span class="skill-pill">Collision Detection</span>
+              <span class="skill-pill">Animation Intergration</span>
+              <span class="skill-pill">Cloud Computing</span>
+              <span class="skill-pill">AWS Certified</span>
+              <span class="skill-pill">Soluiton Architect</span>
+              <span class="skill-pill">AWS VPC</span>
+              <span class="skill-pill">AWS EC2</span>
+              <span class="skill-pill">AWS S3</span>
+              <span class="skill-pill">AWS IAM</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── PROJECTS ─── -->
+    <section class="projects" id="projects">
+      <div class="projects-inner">
+        <div class="projects-header">
+          <div>
+            <span class="section-label js-reveal in-view">01. Featured Work</span>
+            <h2 class="projects-heading js-reveal in-view">
+              Games &amp;<br><span class="outline">Projects</span>
+            </h2>
+          </div>
+          <div class="projects-filter js-reveal in-view" id="projectsFilter">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="prototype">
+              Prototype
+            </button>
+            <button class="filter-btn" data-filter="unity2D">Unity-2D</button>
+            <button class="filter-btn" data-filter="unity3D">Unity-3D</button>
+            <button class="filter-btn" data-filter="WebGl">WebGl Build</button>
+            <button class="filter-btn" data-filter="others">
+              Other Projects
+            </button>
+          </div>
+        </div>
+
+        <div class="projects-grid" id="projectsGrid">
+          <!-- Card 1: 3D Interactive Scene -->
+          <div class="project-card js-reveal in-view" data-tags="unity3D,prototype,WebGl" style="">
+            <div class="card-art">
+              <div class="card-art-bg" style="
+                  background: linear-gradient(
+                    135deg,
+                    #050a1a 0%,
+                    #0a1a3a 40%,
+                    #0d2244 70%,
+                    #061428 100%
+                  );
+                "></div>
+              <div style="
+                  position: absolute;
+                  inset: 0;
+                  background:
+                    radial-gradient(
+                      ellipse at 30% 60%,
+                      rgba(51, 200, 255, 0.25) 0%,
+                      transparent 60%
+                    ),
+                    radial-gradient(
+                      ellipse at 75% 30%,
+                      rgba(255, 51, 112, 0.18) 0%,
+                      transparent 50%
+                    );
+                "></div>
+              <img src="file:///D:/Opera_Download/Game%20Developer%20Portfolio_files/giphy.gif" alt="" style="
+                  position: absolute;
+                  inset: 0;
+                  width: 100%;
+                  height: 100%;
+                  object-fit: cover;
+                  opacity: 1;
+                  z-index: 2;
+                ">
+              <div class="card-art-overlay" style="z-index: 2"></div>
+              <span class="card-genre-badge" style="z-index: 3">3D Interactive</span>
+              <span class="card-featured" style="z-index: 3"></span>
+            </div>
+            <div class="card-body">
+              <div class="card-title">3D Interactive Scene</div>
+              <p class="card-desc">
+                This prototype was made to show case raycast, player controller
+                and UI . Its a simple secene with Mouse interaction
+              </p>
+              <div class="card-tags">
+                <span class="card-tag">Unity 2022</span>
+                <span class="card-tag">C#</span>
+                <span class="card-tag">raycast</span>
+                <span class="card-tag">UI</span>
+              </div>
+              <div class="card-footer">
+                <div class="card-platforms">
+                  <span class="platform-chip">WebGl</span>
+                  <span class="platform-chip">.</span>
+                  <span class="platform-chip">PC</span>
+                </div>
+                <div class="card-footer-actions">
+                  <a href="https://github.com/Mithran2003/My-project-1-" target="_blank" rel="noopener" class="card-github">
+                    <svg viewBox="0 0 24 24">
+                      <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
+                    </svg>
+                    GitHub
+                  </a>
+                  <a href="https://mithran2003.github.io/3D-interactive-Scene-live/" class="card-link">Play
+                    <svg viewBox="0 0 24 24">
+                      <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"></path></svg></a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2: bumpy Car -->
+          <div class="project-card js-reveal in-view" data-tags="unity3D,prototype,WebGl" style="">
+            <div class="card-art">
+              <div class="card-art-bg" style="
+                  background: linear-gradient(
+                    135deg,
+                    #1a0800 0%,
+                    #3a1200 40%,
+                    #5c1e00 70%,
+                    #2a0a00 100%
+                  );
+                "></div>
+              <div style="
+                  position: absolute;
+                  inset: 0;
+                  background:
+                    radial-gradient(
+                      ellipse at 60% 40%,
+                      rgba(255, 140, 0, 0.3) 0%,
+                      transparent 60%
+                    ),
+                    radial-gradient(
+                      ellipse at 20% 70%,
+                      rgba(255, 60, 0, 0.2) 0%,
+                      transparent 50%
+                    );
+                "></div>
+              <img src="file:///D:/Opera_Download/Game%20Developer%20Portfolio_files/giphy.gif" alt="" style="
+                  position: absolute;
+                  inset: 0;
+                  width: 100%;
+                  height: 100%;
+                  object-fit: cover;
+                  opacity: 1;
+                  z-index: 2;
+                ">
+              <div class="card-art-overlay" style="z-index: 2"></div>
+              <span class="card-genre-badge" style="z-index: 3">Sand box</span>
+            </div>
+            <div class="card-body">
+              <div class="card-title">bumpy Car</div>
+              <p class="card-desc">
+                It is a simple sand box secene with a car as player model with
+                basic characther controll and collider interaction.
+              </p>
+              <div class="card-tags">
+                <span class="card-tag">Unity 6</span>
+                <span class="card-tag">C#</span>
+                <span class="card-tag">Player controller</span>
+                <span class="card-tag">Collider</span>
+              </div>
+              <div class="card-footer">
+                <div class="card-platforms">
+                  <span class="platform-chip">WebGl</span>
+                  <span class="platform-chip">·</span>
+                  <span class="platform-chip">PC</span>
+                </div>
+                <div class="card-footer-actions">
+                  <a href="https://github.com/Mithran2003/Prototype-1" target="_blank" rel="noopener" class="card-github">
+                    <svg viewBox="0 0 24 24">
+                      <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
+                    </svg>
+                    GitHub
+                  </a>
+                  <a href="https://mithran2003.github.io/Prototype-1/" class="card-link">Play
+                    <svg viewBox="0 0 24 24">
+                      <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"></path></svg></a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 3: Run From Monsters -->
+          <div class="project-card js-reveal in-view" data-tags="unity2D,WebGl" style="">
+            <div class="card-art">
+              <div class="card-art-bg" style="
+                  background: linear-gradient(
+                    135deg,
+                    #0d001a 0%,
+                    #1a0033 40%,
+                    #2a0060 70%,
+                    #0a0020 100%
+                  );
+                "></div>
+              <div style="
+                  position: absolute;
+                  inset: 0;
+                  background:
+                    radial-gradient(
+                      ellipse at 50% 50%,
+                      rgba(180, 0, 255, 0.25) 0%,
+                      transparent 55%
+                    ),
+                    radial-gradient(
+                      ellipse at 80% 20%,
+                      rgba(0, 220, 255, 0.2) 0%,
+                      transparent 45%
+                    );
+                "></div>
+              <!-- synthwave grid lines -->
+              <svg style="
+                  position: absolute;
+                  inset: 0;
+                  width: 100%;
+                  height: 100%;
+                  opacity: 0.18;
+                " viewBox="0 0 300 165" preserveAspectRatio="none">
+                <line x1="0" y1="110" x2="300" y2="110" stroke="#c87aff" stroke-width=".5"></line>
+                <line x1="0" y1="130" x2="300" y2="130" stroke="#c87aff" stroke-width=".4"></line>
+                <line x1="0" y1="148" x2="300" y2="148" stroke="#c87aff" stroke-width=".3"></line>
+                <line x1="150" y1="110" x2="0" y2="165" stroke="#c87aff" stroke-width=".4"></line>
+                <line x1="150" y1="110" x2="300" y2="165" stroke="#c87aff" stroke-width=".4"></line>
+                <line x1="150" y1="110" x2="50" y2="165" stroke="#c87aff" stroke-width=".3"></line>
+                <line x1="150" y1="110" x2="250" y2="165" stroke="#c87aff" stroke-width=".3"></line>
+              </svg>
+              <img src="file:///D:/Opera_Download/Game%20Developer%20Portfolio_files/giphy.gif" alt="" style="
+                  position: absolute;
+                  inset: 0;
+                  width: 100%;
+                  height: 100%;
+                  object-fit: cover;
+                  opacity: 1;
+                  z-index: 2;
+                ">
+              <span class="card-featured" style="
+                  z-index: 3;
+                  background: rgba(242, 198, 103, 0.354);
+                  color: #ffae00;
+                ">FEATURED</span>
+              <div class="card-art-overlay" style="z-index: 2"></div>
+              <span class="card-genre-badge" style="z-index: 3">2D Platformer</span>
+            </div>
+            <div class="card-body">
+              <div class="card-title">Run from Monsters</div>
+              <p class="card-desc">
+                This is a 2D Platformer game with the goal of avoiding the
+                zombies that spwan randomley.This is a complete game with player
+                select screen and start screen.
+              </p>
+              <div class="card-tags">
+                <span class="card-tag">Unity 2022</span>
+                <span class="card-tag">C#</span>
+                <span class="card-tag">UI</span>
+              </div>
+              <div class="card-footer">
+                <div class="card-platforms">
+                  <span class="platform-chip">WebGl</span>
+                  <span class="platform-chip">·</span>
+                  <span class="platform-chip">PC</span>
+                </div>
+                <div class="card-footer-actions">
+                  <a href="https://github.com/Mithran2003/run-from-monsters" target="_blank" rel="noopener" class="card-github">
+                    <svg viewBox="0 0 24 24">
+                      <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
+                    </svg>
+                    GitHub
+                  </a>
+                  <a href="https://mithran2003.github.io/Run_from_Monster_live/" class="card-link">play
+                    <svg viewBox="0 0 24 24">
+                      <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"></path></svg></a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 4: endless runner -->
+          <div class="project-card js-reveal in-view" data-tags="unity3D,prototype,WebGl" style="">
+            <div class="card-art">
+              <div class="card-art-bg" style="
+                  background: linear-gradient(
+                    135deg,
+                    #0a0f08 0%,
+                    #111a0a 40%,
+                    #1a260e 70%,
+                    #080e06 100%
+                  );
+                "></div>
+              <div style="
+                  position: absolute;
+                  inset: 0;
+                  background:
+                    radial-gradient(
+                      ellipse at 40% 55%,
+                      rgba(122, 255, 173, 0.15) 0%,
+                      transparent 55%
+                    ),
+                    radial-gradient(
+                      ellipse at 70% 25%,
+                      rgba(100, 160, 80, 0.12) 0%,
+                      transparent 50%
+                    );
+                "></div>
+              <img src="file:///D:/Opera_Download/Game%20Developer%20Portfolio_files/giphy.gif" alt="" style="
+                  position: absolute;
+                  inset: 0;
+                  width: 100%;
+                  height: 100%;
+                  object-fit: cover;
+                  opacity: 1;
+                  z-index: 2;
+                ">
+              <div class="card-art-overlay" style="z-index: 2"></div>
+              <span class="card-genre-badge" style="z-index: 3">Endless Runner</span>
+            </div>
+            <div class="card-body">
+              <div class="card-title">Fly away</div>
+              <p class="card-desc">
+                It is a endless runner game where we controle a ballon and try
+                to avoid hiting the bombs . You controll the ballone with space
+                bar making it float up and down when u realse it .
+              </p>
+              <div class="card-tags">
+                <span class="card-tag">Unity 6 </span>
+                <span class="card-tag">C#</span>
+                <span class="card-tag">random spwaners </span>
+                <span class="card-tag">Sound </span>
+              </div>
+              <div class="card-footer">
+                <div class="card-platforms">
+                  <span class="platform-chip">WebGl</span>
+                  <span class="platform-chip">·</span>
+                  <span class="platform-chip">PC</span>
+                </div>
+                <div class="card-footer-actions">
+                  <a href="https://github.com/Mithran2003/challenge-3" target="_blank" rel="noopener" class="card-github">
+                    <svg viewBox="0 0 24 24">
+                      <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
+                    </svg>
+                    GitHub
+                  </a>
+                  <a href="https://mithran2003.github.io/challenge-3/" class="card-link">play
+                    <svg viewBox="0 0 24 24">
+                      <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"></path></svg></a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 5: Sumo Ball -->
+          <div class="project-card js-reveal in-view" data-tags="unity3D,prototype,WebGl" style="">
+            <div class="card-art">
+              <div class="card-art-bg" style="
+                  background: linear-gradient(
+                    135deg,
+                    #000f1a 0%,
+                    #001e33 40%,
+                    #003050 70%,
+                    #000c14 100%
+                  );
+                "></div>
+              <div style="
+                  position: absolute;
+                  inset: 0;
+                  background:
+                    radial-gradient(
+                      ellipse at 35% 60%,
+                      rgba(0, 180, 255, 0.22) 0%,
+                      transparent 55%
+                    ),
+                    radial-gradient(
+                      ellipse at 70% 30%,
+                      rgba(0, 100, 200, 0.18) 0%,
+                      transparent 50%
+                    );
+                "></div>
+              <img src="file:///D:/Opera_Download/Game%20Developer%20Portfolio_files/giphy.gif" alt="" style="
+                  position: absolute;
+                  inset: 0;
+                  width: 100%;
+                  height: 100%;
+                  object-fit: cover;
+                  opacity: 1;
+                  z-index: 2;
+                ">
+              <div class="card-art-overlay" style="z-index: 2"></div>
+              <span class="card-genre-badge" style="z-index: 3">Casul</span>
+
+              <span class="card-featured" style="
+                  z-index: 3;
+                  background: rgba(242, 198, 103, 0.354);
+                  color: #ffae00;
+                ">FEATURED</span>
+            </div>
+            <div class="card-body">
+              <div class="card-title">Sumo Ball</div>
+              <p class="card-desc">
+                Just hit the other ball and make it fall, the game spwan eneymy
+                ball in ways and each wave has a power up with a timer . just
+                survive the waves as long as u can
+              </p>
+              <div class="card-tags">
+                <span class="card-tag">Unity 6</span>
+                <span class="card-tag">C#</span>
+                <span class="card-tag">Power UP</span>
+              </div>
+              <div class="card-footer">
+                <div class="card-platforms">
+                  <span class="platform-chip">WebGl</span>
+                  <span class="platform-chip">·</span>
+                  <span class="platform-chip">PC</span>
+                </div>
+                <div class="card-footer-actions">
+                  <a href="https://github.com/Mithran2003/Prototype-4" target="_blank" rel="noopener" class="card-github">
+                    <svg viewBox="0 0 24 24">
+                      <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
+                    </svg>
+                    GitHub
+                  </a>
+                  <a href="https://mithran2003.github.io/Prototype-4/" class="card-link">Play
+                    <svg viewBox="0 0 24 24">
+                      <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"></path></svg></a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 6: Fruit Clicker  -->
+          <div class="project-card js-reveal in-view" data-tags="unity3D,WebGl" style="">
+            <div class="card-art">
+              <div class="card-art-bg" style="
+                  background: linear-gradient(
+                    135deg,
+                    #0a001a 0%,
+                    #130030 40%,
+                    #1c0048 70%,
+                    #080012 100%
+                  );
+                "></div>
+              <div style="
+                  position: absolute;
+                  inset: 0;
+                  background:
+                    radial-gradient(
+                      ellipse at 55% 45%,
+                      rgba(160, 80, 255, 0.25) 0%,
+                      transparent 55%
+                    ),
+                    radial-gradient(
+                      ellipse at 20% 30%,
+                      rgba(255, 184, 0, 0.12) 0%,
+                      transparent 45%
+                    );
+                "></div>
+              <img src="file:///D:/Opera_Download/Game%20Developer%20Portfolio_files/giphy.gif" alt="" style="
+                  position: absolute;
+                  inset: 0;
+                  width: 100%;
+                  height: 100%;
+                  object-fit: cover;
+                  opacity: 1;
+                  z-index: 2;
+                ">
+              <div class="card-art-overlay" style="z-index: 2"></div>
+              <span class="card-genre-badge" style="z-index: 3">Casul</span>
+              <span class="card-featured" style="
+                  z-index: 3;
+                  background: rgba(242, 198, 103, 0.354);
+                  color: #ffae00;
+                ">FEATURED</span>
+            </div>
+            <div class="card-body">
+              <div class="card-title">Fruit Clicker</div>
+              <p class="card-desc">
+                It is a Casule game similer to ninja fruit cutter. The game
+                contains UI,Dificulty selection and Score
+              </p>
+              <div class="card-tags">
+                <span class="card-tag">Unity 6</span>
+                <span class="card-tag">C#</span>
+                <span class="card-tag">UI</span>
+                <span class="card-tag">Dificulty Selection</span>
+              </div>
+              <div class="card-footer">
+                <div class="card-platforms">
+                  <span class="platform-chip">WebGl</span>
+                  <span class="platform-chip">·</span>
+                  <span class="platform-chip">PC</span>
+                </div>
+                <div class="card-footer-actions">
+                  <a href="https://github.com/Mithran2003/Prototype-5" target="_blank" rel="noopener" class="card-github">
+                    <svg viewBox="0 0 24 24">
+                      <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
+                    </svg>
+                    GitHub
+                  </a>
+                  <a href="https://mithran2003.github.io/Prototype-5/" class="card-link">Play
+                    <svg viewBox="0 0 24 24">
+                      <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"></path></svg></a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Card 7: Top-Down Shooter -->
+          <div class="project-card js-reveal in-view" data-tags="unity3D,prototype,WebGl" style="">
+            <div class="card-art">
+              <div class="card-art-bg" style="
+                  background: linear-gradient(
+                    135deg,
+                    #001a0a 0%,
+                    #003318 40%,
+                    #004d25 70%,
+                    #000f06 100%
+                  );
+                "></div>
+              <div style="
+                  position: absolute;
+                  inset: 0;
+                  background:
+                    radial-gradient(
+                      ellipse at 50% 40%,
+                      rgba(0, 255, 120, 0.22) 0%,
+                      transparent 55%
+                    ),
+                    radial-gradient(
+                      ellipse at 80% 70%,
+                      rgba(255, 184, 0, 0.12) 0%,
+                      transparent 45%
+                    );
+                "></div>
+              <!-- radar sweep lines -->
+              <svg style="
+                  position: absolute;
+                  inset: 0;
+                  width: 100%;
+                  height: 100%;
+                  opacity: 0.15;
+                " viewBox="0 0 300 165" preserveAspectRatio="none">
+                <circle cx="150" cy="82" r="60" stroke="#00ff78" stroke-width=".5" fill="none"></circle>
+                <circle cx="150" cy="82" r="35" stroke="#00ff78" stroke-width=".4" fill="none"></circle>
+                <line x1="150" y1="22" x2="150" y2="142" stroke="#00ff78" stroke-width=".4"></line>
+                <line x1="90" y1="82" x2="210" y2="82" stroke="#00ff78" stroke-width=".4"></line>
+              </svg>
+              <img src="file:///D:/Opera_Download/Game%20Developer%20Portfolio_files/giphy.gif" alt="" style="
+                  position: absolute;
+                  inset: 0;
+                  width: 100%;
+                  height: 100%;
+                  object-fit: cover;
+                  opacity: 1;
+                  z-index: 2;
+                ">
+              <span class="card-featured" style="
+                  z-index: 3;
+                  background: rgba(242, 198, 103, 0.354);
+                  color: #ffae00;
+                ">FEATURED</span>
+              <div class="card-art-overlay" style="z-index: 2"></div>
+              <span class="card-genre-badge" style="z-index: 3">Top-Down</span>
+            </div>
+            <div class="card-body">
+              <div class="card-title">Feed the Cattle</div>
+              <p class="card-desc">
+                A top-down shooter where you where u throw apples to your farm
+                animals as they stamped toward you .
+              </p>
+              <div class="card-tags">
+                <span class="card-tag">Unity 6</span>
+                <span class="card-tag">C#</span>
+                <span class="card-tag">Top Down</span>
+                <span class="card-tag">Projectile</span>
+              </div>
+              <div class="card-footer">
+                <div class="card-platforms">
+                  <span class="platform-chip">WebGl</span>
+                  <span class="platform-chip">·</span>
+                  <span class="platform-chip">PC</span>
+                </div>
+                <div class="card-footer-actions">
+                  <a href="https://github.com/Mithran2003/Prototype-3" target="_blank" rel="noopener" class="card-github">
+                    <svg viewBox="0 0 24 24">
+                      <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
+                    </svg>
+                    GitHub
+                  </a>
+                  <a href="https://mithran2003.github.io/Prototype-3/" class="card-link">Play
+                    <svg viewBox="0 0 24 24">
+                      <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"></path></svg></a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 8: kitchen chaos -->
+          <div class="project-card js-reveal in-view" data-tags="unity3D" style="">
+            <div class="card-art">
+              <div class="card-art-bg" style="
+                  background: linear-gradient(
+                    135deg,
+                    #1a0010 0%,
+                    #33001f 40%,
+                    #4d0030 70%,
+                    #0f0009 100%
+                  );
+                "></div>
+              <div style="
+                  position: absolute;
+                  inset: 0;
+                  background:
+                    radial-gradient(
+                      ellipse at 30% 60%,
+                      rgba(255, 51, 112, 0.25) 0%,
+                      transparent 55%
+                    ),
+                    radial-gradient(
+                      ellipse at 75% 25%,
+                      rgba(255, 184, 0, 0.15) 0%,
+                      transparent 50%
+                    );
+                "></div>
+              <!-- platform tiles suggestion -->
+              <svg style="
+                  position: absolute;
+                  inset: 0;
+                  width: 100%;
+                  height: 100%;
+                  opacity: 0.12;
+                " viewBox="0 0 300 165" preserveAspectRatio="none">
+                <rect x="20" y="120" width="60" height="8" fill="#ff3370"></rect>
+                <rect x="110" y="95" width="50" height="8" fill="#ff3370"></rect>
+                <rect x="195" y="70" width="70" height="8" fill="#ff3370"></rect>
+                <rect x="60" y="50" width="40" height="8" fill="#ffb800"></rect>
+              </svg>
+              <img src="file:///D:/Opera_Download/Game%20Developer%20Portfolio_files/giphy.gif" alt="" style="
+                  position: absolute;
+                  inset: 0;
+                  width: 100%;
+                  height: 100%;
+                  object-fit: cover;
+                  opacity: 1;
+                  z-index: 2;
+                ">
+              <div class="card-art-overlay" style="z-index: 2"></div>
+              <span class="card-genre-badge" style="z-index: 3">Casule</span>
+            </div>
+            <div class="card-body">
+              <div class="card-title">kitchen Chaos</div>
+              <p class="card-desc">
+                It is a game where u play as a chef and make burgers to order in
+                an chaotic enviornment.
+              </p>
+              <div class="card-tags">
+                <span class="card-tag">Unity 6</span>
+                <span class="card-tag">C#</span>
+                <span class="card-tag">Contoller support</span>
+                <span class="card-tag">Polished code</span>
+              </div>
+              <div class="card-footer">
+                <div class="card-platforms">
+                  <span class="platform-chip">PC</span>
+                </div>
+                <div class="card-footer-actions">
+                  <a href="https://github.com/Mithran2003/Mad-Kitchen" target="_blank" rel="noopener" class="card-github">
+                    <svg viewBox="0 0 24 24">
+                      <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
+                    </svg>
+                    GitHub
+                  </a>
+                  <a href="file:///D:/Opera_Download/Portfolio_gif.html#" class="card-link">Coming Soon(under development)
+                    <svg viewBox="0 0 24 24">
+                      <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"></path></svg></a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 9: Other projects -->
+          <div class="project-card js-reveal in-view" data-tags="others" style="">
+            <div class="card-art">
+              <div class="card-art-bg" style="
+                  background: linear-gradient(
+                    135deg,
+                    #001218 0%,
+                    #002535 40%,
+                    #003a50 70%,
+                    #000b10 100%
+                  );
+                "></div>
+              <div style="
+                  position: absolute;
+                  inset: 0;
+                  background:
+                    radial-gradient(
+                      ellipse at 45% 50%,
+                      rgba(51, 200, 255, 0.22) 0%,
+                      transparent 55%
+                    ),
+                    radial-gradient(
+                      ellipse at 80% 20%,
+                      rgba(122, 255, 173, 0.15) 0%,
+                      transparent 45%
+                    );
+                "></div>
+              <!-- More Projects  -->
+              <svg style="
+                  position: absolute;
+                  inset: 0;
+                  width: 100%;
+                  height: 100%;
+                  opacity: 0.15;
+                " viewBox="0 0 300 165" preserveAspectRatio="none">
+                <rect x="90" y="42" width="35" height="35" fill="none" stroke="#33c8ff" stroke-width=".8"></rect>
+                <rect x="132" y="42" width="35" height="35" fill="none" stroke="#33c8ff" stroke-width=".8"></rect>
+                <rect x="174" y="42" width="35" height="35" fill="none" stroke="#33c8ff" stroke-width=".8"></rect>
+                <rect x="90" y="84" width="35" height="35" fill="none" stroke="#33c8ff" stroke-width=".8"></rect>
+                <rect x="132" y="84" width="35" height="35" fill="#33c8ff" fill-opacity=".2" stroke="#33c8ff" stroke-width=".8"></rect>
+                <rect x="174" y="84" width="35" height="35" fill="none" stroke="#33c8ff" stroke-width=".8"></rect>
+              </svg>
+              <img src="file:///D:/Opera_Download/Game%20Developer%20Portfolio_files/giphy.gif" alt="" style="
+                  position: absolute;
+                  inset: 0;
+                  width: 100%;
+                  height: 100%;
+                  object-fit: cover;
+                  opacity: 1;
+                  z-index: 2;
+                ">
+              <div class="card-art-overlay" style="z-index: 2"></div>
+            </div>
+            <div class="card-body">
+              <div class="card-title">Other Projects</div>
+              <p class="card-desc">
+                More Projects Available in my GitHub Repositories with source
+                code and Live WebGl builds
+              </p>
+              <div class="card-tags"></div>
+              <div class="card-footer">
+                <div class="card-platforms"></div>
+                <div class="card-footer-actions">
+                  <a href="https://github.com/Mithran2003" target="_blank" rel="noopener" class="card-github">
+                    <svg viewBox="0 0 24 24">
+                      <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
+                    </svg>
+                    GitHub
+                  </a>
+                  <a href="https://github.com/Mithran2003" class="card-link">Check Out GitHub Profile
+                    <svg viewBox="0 0 24 24">
+                      <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"></path></svg></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /projects-grid -->
+      </div>
+      <!-- /projects-inner -->
+    </section>
+
+    <!-- ─── CONTACT ─── -->
+    <section class="projects" id="contact">
+      <div class="projects-inner">
+        <span class="section-label js-reveal">04. Contact Me</span>
+
+        <div class="projects-header">
+          <h2 class="projects-heading js-reveal">
+            Let's <span class="outline">Build</span><br>
+            Something Great
+          </h2>
+        </div>
+
+        <div style="
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            align-items: start;
+          ">
+          <div class="project-card js-reveal in-view" style="padding: 2rem">
+            <h3 class="card-title" style="margin-bottom: 1rem">Get In Touch</h3>
+
+            <p class="card-desc" style="margin-bottom: 1.5rem">
+              I'm available for freelance work, gameplay programming roles,
+              multiplayer systems, and collaborative game development projects.
+              Let's create immersive experiences together.
+            </p>
+
+            <div class="skills-list" style="opacity: 1; transform: none">
+              <span class="skill-pill">Remote Friendly</span>
+              <span class="skill-pill">Freelance</span>
+              <span class="skill-pill">Full-Time</span>
+              <span class="skill-pill">Ready To Relocate</span>
+            </div>
+          </div>
+
+          <div class="project-card js-reveal in-view" style="padding: 2rem">
+            <h3 class="card-title" style="margin-bottom: 1rem">Contact Info</h3>
+
+            <div style="display: flex; flex-direction: column; gap: 1rem">
+              <a href="mailto:mithransaini5@gmail.com" class="card-link" style="font-size: 0.8rem">
+                Email Me
+                <svg viewBox="0 0 24 24">
+                  <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"></path>
+                </svg>
+              </a>
+
+              <a href="https://www.linkedin.com/in/mithran-saini-720361287/" class="card-link" style="font-size: 0.8rem">
+                LinkedIn
+                <svg viewBox="0 0 24 24">
+                  <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"></path>
+                </svg>
+              </a>
+
+              <a href="https://github.com/Mithran2003" class="card-link" style="font-size: 0.8rem">
+                GitHub
+                <svg viewBox="0 0 24 24">
+                  <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"></path>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── FOOTER ─── -->
+    <footer>
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <a href="file:///D:/Opera_Download/Portfolio_gif.html#" class="logo">
+            <svg class="logo-icon-sm" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+              <rect x="4" y="10" width="24" height="14" rx="7" fill="none" stroke="currentColor" stroke-width="1.8"></rect>
+              <line x1="10" y1="17" x2="14" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></line>
+              <line x1="12" y1="15" x2="12" y2="19" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></line>
+              <circle cx="20" cy="15.5" r="1.2" fill="currentColor"></circle>
+              <circle cx="22.5" cy="18" r="1.2" fill="currentColor"></circle>
+            </svg>
+            Dev<span class="accent-text">Forge</span>
+          </a>
+          <p>// Building worlds, one<br>commit at a time.</p>
+          <div class="status-badge">
+            <span class="status-dot"></span>
+            Available for projects
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4>Navigate</h4>
+          <ul>
+            <li><a href="file:///D:/Opera_Download/Portfolio_gif.html#projects">Games</a></li>
+            <li><a href="file:///D:/Opera_Download/Portfolio_gif.html#about">About</a></li>
+            <li><a href="file:///D:/Opera_Download/Portfolio_gif.html#contact">Contact Me</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2026 <span>DevForge</span> — All rights reserved.</p>
+        <div class="social-links">
+          <!-- GitHub -->
+          <a href="https://github.com/Mithran2003" aria-label="GitHub">
+            <svg viewBox="0 0 24 24">
+              <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.385-1.335-1.755-1.335-1.755-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
+            </svg>
+          </a>
+          <!-- LinkedIn -->
+          <a href="http://www.linkedin.com/in/mithran-saini-720361287" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24">
+              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"></path>
+            </svg>
+          </a>
+          <!-- YouTube -->
+          <a href="file:///D:/Opera_Download/Portfolio_gif.html#" aria-label="YouTube">
+            <svg viewBox="0 0 24 24">
+              <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"></path>
+            </svg>
+          </a>
+          <!-- itch.io -->
+          <a href="file:///D:/Opera_Download/Portfolio_gif.html#" aria-label="itch.io">
+            <svg viewBox="0 0 24 24">
+              <path d="M3.13 1.338C2.08 1.96.02 4.328 0 4.95v1.03c0 1.303 1.22 2.45 2.325 2.45 1.33 0 2.436-1.102 2.436-2.41 0 1.308 1.07 2.41 2.4 2.41 1.328 0 2.362-1.102 2.362-2.41 0 1.308 1.106 2.41 2.434 2.41h.024c1.327 0 2.434-1.102 2.434-2.41 0 1.308 1.033 2.41 2.362 2.41 1.33 0 2.4-1.102 2.4-2.41 0 1.308 1.106 2.41 2.436 2.41C22.78 8.43 24 7.283 24 5.98V4.95c-.02-.622-2.08-2.99-3.13-3.612C19.745.8 4.255.8 3.13 1.338zm5.55 8.61c-.12 0-.24.006-.36.017-.83.07-1.553.43-2.104.965L6.1 10.85c-.006.085-.01.17-.01.256v8.16C6.09 21.696 8.427 24 11.1 24h1.8c2.674 0 5.01-2.304 5.01-4.734v-8.16c0-.087-.003-.17-.01-.256l-.115-.92c-.55-.534-1.274-.894-2.103-.965a5.048 5.048 0 0 0-.36-.018c-1.165 0-2.19.53-2.87 1.35a3.8 3.8 0 0 0-.452-.366 3.687 3.687 0 0 0-2.018-.6c-.43 0-.843.08-1.223.22z"></path>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      /* ── Navbar scroll ── */
+      const navbar = document.getElementById("navbar");
+      window.addEventListener(
+        "scroll",
+        () => {
+          navbar.classList.toggle("scrolled", window.scrollY > 20);
+        },
+        { passive: true },
+      );
+
+      /* ── Hamburger ── */
+      const hamburger = document.getElementById("hamburger");
+      const mobileMenu = document.getElementById("mobileMenu");
+      hamburger.addEventListener("click", () => {
+        const open = hamburger.classList.toggle("open");
+        mobileMenu.classList.toggle("open", open);
+        document.body.style.overflow = open ? "hidden" : "";
+      });
+      function closeMobile() {
+        hamburger.classList.remove("open");
+        mobileMenu.classList.remove("open");
+        document.body.style.overflow = "";
+      }
+
+      /* ── Particle constellation animation ── */
+      (function () {
+        const canvas = document.getElementById("heroCanvas");
+        const ctx = canvas.getContext("2d");
+        let W,
+          H,
+          nodes = [];
+        const COUNT = 72;
+        const LINK_DIST = 155;
+        const NODE_COL = "255,184,0"; /* amber */
+        const LINK_COL = "255,51,112"; /* rose  */
+
+        function resize() {
+          W = canvas.width = canvas.offsetWidth;
+          H = canvas.height = canvas.offsetHeight;
+          spawn();
+        }
+
+        function spawn() {
+          nodes = Array.from({ length: COUNT }, () => ({
+            x: Math.random() * W,
+            y: Math.random() * H,
+            vx: (Math.random() - 0.5) * 0.38,
+            vy: (Math.random() - 0.5) * 0.38,
+            r: 1 + Math.random() * 1.4,
+            pulse: Math.random() * Math.PI * 2,
+            pSpeed: 0.008 + Math.random() * 0.012,
+          }));
+        }
+
+        function draw() {
+          ctx.clearRect(0, 0, W, H);
+
+          /* update positions */
+          nodes.forEach((n) => {
+            n.pulse += n.pSpeed;
+            n.x += n.vx;
+            n.y += n.vy;
+            if (n.x < -20) n.x = W + 20;
+            if (n.x > W + 20) n.x = -20;
+            if (n.y < -20) n.y = H + 20;
+            if (n.y > H + 20) n.y = -20;
+          });
+
+          /* draw links */
+          for (let i = 0; i < nodes.length; i++) {
+            for (let j = i + 1; j < nodes.length; j++) {
+              const a = nodes[i],
+                b = nodes[j];
+              const dx = a.x - b.x,
+                dy = a.y - b.y;
+              const dist = Math.sqrt(dx * dx + dy * dy);
+              if (dist > LINK_DIST) continue;
+              const alpha = (1 - dist / LINK_DIST) * 0.22;
+              ctx.beginPath();
+              ctx.moveTo(a.x, a.y);
+              ctx.lineTo(b.x, b.y);
+              ctx.strokeStyle = `rgba(${LINK_COL},${alpha.toFixed(3)})`;
+              ctx.lineWidth = 0.8;
+              ctx.stroke();
+            }
+          }
+
+          /* draw nodes */
+          nodes.forEach((n) => {
+            const alpha = 0.25 + 0.18 * Math.sin(n.pulse);
+            /* outer glow ring */
+            ctx.beginPath();
+            ctx.arc(n.x, n.y, n.r + 3, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(${NODE_COL},${(alpha * 0.3).toFixed(3)})`;
+            ctx.fill();
+            /* core dot */
+            ctx.beginPath();
+            ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(${NODE_COL},${(alpha + 0.2).toFixed(3)})`;
+            ctx.fill();
+          });
+
+          requestAnimationFrame(draw);
+        }
+
+        window.addEventListener("resize", resize);
+        resize();
+        requestAnimationFrame(draw);
+      })();
+
+      /* ── Project filter ── */
+      (function () {
+        const filterBtns = document.querySelectorAll(".filter-btn");
+        const projectCards = document.querySelectorAll(".project-card");
+
+        filterBtns.forEach((btn) => {
+          btn.addEventListener("click", () => {
+            /* update active state */
+            filterBtns.forEach((b) => b.classList.remove("active"));
+            btn.classList.add("active");
+
+            const filter = btn.dataset.filter;
+
+            projectCards.forEach((card) => {
+              const tags = (card.dataset.tags || "").split(",");
+              const matches = filter === "all" || tags.includes(filter);
+
+              if (matches) {
+                card.style.removeProperty("display");
+                /* re-trigger entry animation */
+                card.classList.remove("in-view");
+                requestAnimationFrame(() => {
+                  requestAnimationFrame(() => card.classList.add("in-view"));
+                });
+              } else {
+                card.classList.remove("in-view");
+                /* wait for opacity transition before hiding */
+                card.addEventListener("transitionend", function hide() {
+                  if (!card.classList.contains("in-view"))
+                    card.style.display = "none";
+                  card.removeEventListener("transitionend", hide);
+                });
+              }
+            });
+          });
+        });
+      })();
+
+      /* ── Scroll-reveal: About section ── */
+      (function () {
+        const revealEls = document.querySelectorAll(".js-reveal");
+        const revealObs = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("in-view");
+                revealObs.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.15 },
+        );
+        revealEls.forEach((el) => revealObs.observe(el));
+
+        /* Animated count-up for stat-card numbers */
+        const statNums = document.querySelectorAll(".stat-card-num");
+        const countObs = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (!entry.isIntersecting) return;
+              const el = entry.target;
+              const sup = el.querySelector("sup");
+              const suffix = sup ? sup.textContent : "";
+              const raw = el.textContent.replace(suffix, "").trim();
+              const isM = raw.includes("M");
+              const target = isM ? parseFloat(raw) : parseInt(raw);
+              let start = null;
+              const duration = 1200;
+              function step(ts) {
+                if (!start) start = ts;
+                const prog = Math.min((ts - start) / duration, 1);
+                const eased = 1 - Math.pow(1 - prog, 3);
+                const val = isM
+                  ? (eased * target).toFixed(eased >= 1 ? 0 : 1)
+                  : Math.round(eased * target);
+                el.innerHTML = (isM ? val + "M" : val) + `<sup>${suffix}</sup>`;
+                if (prog < 1) requestAnimationFrame(step);
+              }
+              requestAnimationFrame(step);
+              countObs.unobserve(el);
+            });
+          },
+          { threshold: 0.6 },
+        );
+        statNums.forEach((n) => countObs.observe(n));
+      })();
+    </script>
+  
+
+</body></html>
